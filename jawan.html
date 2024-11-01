@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawan - Product Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+      /* Main header styles */
+.main-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-color:hsl(34, 96%, 56%);
+   padding: 20px;
+   color: #fff;
+   border-bottom: 1px solid #ccc;
+}
+
+.header-left {
+   display: flex;
+   align-items: center;
+}
+
+.header-left h3 {
+   margin: 0;
+   font-size: 1.2em;
+   font-weight: 500;
+}
+
+.header-right {
+   display: flex;
+   align-items: center;
+}
+
+.header-right button {
+   background-color: transparent;
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   margin-left: 10px;
+   cursor: pointer;
+   font-size: 1em;
+   display: flex;
+   align-items: center;
+}
+
+.header-right button i {
+   margin-right: 5px;
+}
+
+/* Product header styles */
+.product-header {
+   display: flex;
+   align-items: center;
+   margin-top: 20px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 20px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+   position: relative;
+   overflow: hidden;
+}
+
+.product-image {
+   flex: 1;
+   position: relative;
+   z-index: 1;
+}
+
+.product-image img {
+   max-width: 100%;
+   border-radius: 10px;
+   display: block;
+}
+.header-content {
+           flex: 1;
+           position: relative;
+           z-index: 1;
+           text-align: center;
+           background-color:hsl(34, 96%, 56%);
+           color: #fff;
+           border-radius:50% 0% 0% 50%;
+           padding: 40px 20px;
+           box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+       }
+       .header-content h3 {
+           font-size: 1.5em;
+           margin: 5px 0;
+       }
+       .header-content h1 {
+           font-size: 3em;
+           margin: 10px 0;
+       }
+       .header-content h4 {
+           font-size: 1.2em;
+           margin: 5px 0;
+       }
+
+/* Product details styles */
+.product-detail {
+   margin-top: 20px;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 20px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+   position: relative;
+   overflow: hidden;
+}
+
+.product-info {
+   position: relative;
+   z-index: 1;
+}
+
+.product-info h2 {
+   font-size: 2em;
+   margin-bottom: 20px;
+}
+
+.product-info p {
+   font-size: 1.2em;
+   line-height: 1.6;
+}
+
+/* Footer styles */
+footer {
+   background-color: #14741c;
+   color: #fff;
+   text-align: center;
+   padding: 20px 0;
+   position: relative;
+}
+
+.footer-top {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.logo-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+}
+
+.footer-logo {
+   width: 50px;
+   height: auto;
+}
+
+.footer-top h2 {
+   margin: 0;
+   font-size: 2em;
+}
+
+.footer-top p {
+   margin: 5px 0;
+   font-size: 1.2em;
+}
+
+.footer-content {
+   text-align: center;
+}
+
+.footer-content .social-icons {
+   margin-top: 10px;
+}
+
+.footer-content .social-icon {
+   color: #fff;
+   margin: 0 10px;
+   font-size: 1.5em;
+   text-decoration: none;
+}
+
+.footer-content .social-icon:hover {
+   color: #ffd700;
+}
+
+/* Proceed button styles */
+.proceed-button {
+   background-color: #4CAF50; /* Green color */
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   font-size: 1em;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.proceed-button:hover {
+   background-color: #45a049; /* Darker green for hover */
+}
+
+ /* Responsive design */
+ @media (max-width: 768px) {
+           .main-header {
+               flex-direction: column;
+               align-items: flex-start;
+           }
+           .header-left,
+           .header-right {
+               margin-bottom: 10px;
+           }
+           .product-header {
+               flex-direction: column;
+           }
+           .header-content {
+               border-radius: 50% 50% 0 0;
+           }
+       }
+/* Add space between product info and footer */
+.product-detail {
+   margin-bottom: 40px; /* Adjust this value to control the space between the product info and footer */
+}
+
+/* Footer styles */
+footer {
+   background-color: #14741c;
+   color: #fff;
+   text-align: center;
+   padding: 20px 0;
+   position: relative;
+   margin-top: 20px; /* You can also use margin-top here if needed */
+}
+/* Footer logo styles */
+.logo-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px; /* Space between image and text */
+   overflow: hidden; /* Ensures no overflow of the image */
+}
+
+.footer-logo {
+   width: 50px; /* Adjust size as needed */
+   height: auto; /* Maintain aspect ratio */
+   border-radius: 50%; /* Remove circular clipping */
+   /* Optional: add a border if you want */
+   border: 2px solid #fff; /* White border for visibility */
+   object-fit: contain; /* Ensures the logo fits within the container without stretching */
+}
+
+.header-content {
+           text-align: center;
+           margin: 20px;
+       }
+
+@keyframes moveText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.moving-text {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.moving-text span {
+  display: inline-block;
+  animation: moveText 10s linear infinite;
+}
+ .btn:focus {
+            box-shadow: none; /* Remove focus shadow */
+            outline: none;    /* Remove outline */
+        }
+        
+        /* Remove background highlight on click */
+        .btn:active {
+            background-color: none; /* Set the desired color */
+        }
+
+        /* Optional: Prevent grey background on hover */
+        .btn-secondary:hover {
+            background-color:none; /* Original secondary color or choose your color */
+        }
+
+        .dropdown-item:focus, .dropdown-item:active {
+    outline: none; /* Removes the default outline */
+    box-shadow: none; /* Removes any box-shadow */
+    background-color: transparent; /* Keeps background transparent if needed */
+}
+
+
+   
+     </style>
+</head>
+<body>
+  <div class="main-header">
+    <div class="header-left">
+      <h3><img src="https://iili.io/dj90yMX.png" alt="Agro Pest Logo" class="footer-logo">
+        AGRO PEST </h3>
+  
+    </div>
+    <div class="header-right">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Products
+      </button>
+      <div class="header-right">
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="insecticides.html">Insecticides</a></li>
+          <li><a class="dropdown-item" href="herbicides.html">Herbicides</a></li>
+          <li><a class="dropdown-item" href="fungicides.html">Fungicides</a></li>
+          <li><a class="dropdown-item" href="organicnutrients.html">Organic Nutrients</a></li>
+          <li><a class="dropdown-item" href="pesttraps.html">Pest-Traps</a></li>
+      </ul>
+  </div>
+    <div class="header-right">
+        <button onclick="shareProduct()">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+    </div>
+  </div>
+  </div>
+    <div class="container">
+        <header class="product-header">
+            <div class="product-image">
+              <img src="https://sahakarcropsciencepvtltd.com/wp-content/uploads/2023/09/Jawan-3-1024x1024.png" alt="Jawan" style="width:500px; height: 400px;"></a></div>
+                <div class="header-content">
+                  <h3><i class="fas fa-leaf"></i>Bio Stimulant</h3>
+
+                  <h1>JAWAN</h1>
+             
+            </div>
+        </header>
+
+        <div class="product-detail" data-aos="fade-up">
+            <div class="product-info">
+              <h2>   <b> General Info</b></h2>
+             
+              <p>
+                Sahakar Jawan is a bio-stimulant derived from natural extracts that enhances resistance against major pests like Spodoptera, Heliothis, Semi Loopers, and Fruit and Shoot Borers. It promotes uniform crop growth, leading to higher yields and better quality. It can be mixed with other insecticides and fungicides. Suitable for Cotton, Chillies, Pulses, Groundnut, Soybean, Maize, Tomato, Brinjal, Bhendi, Onion, and other fruits and vegetables.
+            </p>
+                            <p><b >Presentation Available: </b>250ml
+            
+                        </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+      <div class="footer-top">
+      <div class="logo-container">
+<img src="https://iili.io/dj90yMX.png" alt="Agro Pest Logo" class="footer-logo">
+          <h2>Agro Pest</h2>
+      </div>
+          <p>Your Trusted Partner in Agricultural Solutions</p>
+
+      </div>
+      <footer class="py-5">
+        <div class="row">
+          <div class="col-6 col-md-2 mb-3">
+            <h5>Our Products</h5>
+          <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                  <a href="insecticides.html" class="nav-link p-0 text-body-secondary">
+                    <i class="fas fa-bug"></i> Insecticides
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="herbicides.html" class="nav-link p-0 text-body-secondary">
+                    <i class="fas fa-seedling"></i> Herbicides
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="fungicides.html" class="nav-link p-0 text-body-secondary">
+                    <i class="fas fa-bacteria"></i> Fungicides
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="organicnutrients.html" class="nav-link p-0 text-body-secondary">
+                    <i class="fas fa-leaf"></i> Organic Nutrients
+                  </a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="pesttraps.html" class="nav-link p-0 text-body-secondary">
+                    <i class="fas fa-square"></i> Pest Traps
+                  </a>
+                </li>
+              </ul>
+                 
+          </div>
+    
+          <div class="col-6 col-md-2 mb-3">
+            <h5>Connect With Us</h5>
+<ul class="nav flex-column">
+<li class="nav-item mb-2">
+  <a href="https://wa.me/9014255803?text=Hello%20Agro%20Pest" class="nav-link p-0 text-body-secondary" target="_blank">
+    <i class="fab fa-whatsapp"></i> Whatsapp
+  </a>
+</li>
+<li class="nav-item mb-2">
+<a href="https://www.instagram.com/agro_pest_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="nav-link p-0 text-body-secondary">
+  <i class="fab fa-instagram"></i> Instagram
+</a>
+</li>
+</ul>
+          </div>
+          <div class="col-6 col-md-2 mb-3">
+            <h5>Visit Our Location</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <a href="https://maps.app.goo.gl/SRzxZjUsdS8wWKy86" 
+                       class="nav-link p-0 text-body-secondary" target="_blank">
+                      <i class="fas fa-store"></i> Jogulamba Traders
+                    </a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="https://maps.app.goo.gl/U7qPc9AHLfeKnKcFA" 
+                       class="nav-link p-0 text-body-secondary" target="_blank">
+                      <i class="fas fa-store"></i> Bhavani Traders
+                    </a>
+                  </li>
+          </div>
+
+          <div class="col-md-5 offset-md-1 mb-3">
+            <form>
+              <h5>Feedback to AGRO PEST</h5>
+              <h6>Get the latest updates and offers from Agro Pest.</h6>
+              <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                <label for="newsletter1" class="visually-hidden">Feedback</label>
+                <input id="newsletter1" type="text" class="form-control" placeholder="Feedback">
+                <button class="proceed-button">Proceed</button>
+
+            </div>
+            </form>
+          </div>
+        </div>   
+</footer>
+<marquee behavior="scroll" direction="left">
+  <span>
+    <h4 style="display:inline;"> BHAVANI TRADERS & JOGULAMBA TRADERS </h4>
+    <h5 style="display:inline;"> - Insecticides, Herbicides, Fungicides, Organic Nutrients, Pest Traps</h5>
+    <h5 style="display:inline;" color="black;"> -Meet us at Bhavani Traders, Ananthapuram Village, Gadwal Mandal, Jogulamba Gadwal District & Jogulamba Traders, Kodandapuram Village, Itikyala Mandal, Jogulamba Gadwal District --Contact us
+      - 9014255803, 9640495352</h5>
+  </span>
+</marquee>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+      AOS.init();
+      function shareProduct() {
+          if (navigator.share) {
+              navigator.share({
+                  title: 'Jawan',
+                  text: 'Check out this amazing bio stimulant product!',
+                  url: window.location.href,
+              });
+          } else {
+              alert('Sharing is not supported in this browser.');
+          }
+      }
+      function redirectToAddress() {
+  // Debugging message
+  console.log("Buy Now button clicked, redirecting to address.html");
+  window.location.href = 'address.html';
+}
+  </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
