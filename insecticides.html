@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insecticides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        /* Basic Reset */
+        body, h1, h2, p, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        header {
+            background: #0b4f03;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .search-container {
+            display: flex;
+            position: relative;
+        }
+
+        .search-container input,
+        .search-container button {
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .search-container input {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-container button {
+            background: #116408;
+            color: #fff;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .search-container input:disabled,
+        .search-container button:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background: #f1f1f1;
+        }
+
+        .suggestion-item.active {
+            background: #f1f1f1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://housebouse.com/wp-content/uploads/2023/08/Ladybug-and-Thrips-Interaction.png') no-repeat center center;
+            background-size: cover;
+            height: 500px;
+            background-attachment: fixed;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background: #ff6600;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 50px 0;
+            background: white;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-item {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product-item h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .product-item p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #0b4f03;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .cta-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-container input,
+    .search-container button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+        .logo-icon {
+            width: 24px;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+white-space: nowrap;
+        }
+        #search-input {
+            padding: 5px;
+
+        }
+        #search-button {
+            padding: 5px;
+
+display: inline-block;
+vertical-align: middle;
+        }
+        /* Footer styles */
+footer {
+   background-color: #14741c;
+   color: #fff;
+   text-align: center;
+   padding: 20px 0;
+   position: relative;
+   margin-top: 20px; /* You can also use margin-top here if needed */
+}
+/* Footer logo styles */
+.logo-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px; /* Space between image and text */
+   overflow: hidden; /* Ensures no overflow of the image */
+}
+
+.footer-logo {
+   width: 50px; /* Adjust size as needed */
+   height: auto; /* Maintain aspect ratio */
+   border-radius: 50%; /* Remove circular clipping */
+   /* Optional: add a border if you want */
+   border: 2px solid #fff; /* White border for visibility */
+   object-fit: contain; /* Ensures the logo fits within the container without stretching */
+}
+.buttonBox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 10px auto 35px;
+}
+.header-content {
+           text-align: center;
+           margin: 20px;
+       }
+
+       .header-buttons {
+           margin-top: 20px;
+       }
+    
+.product-item h3 {
+    color: black;
+    text-decoration: none;
+}
+
+.product-item {
+    text-decoration: none;
+}
+.proceed-button {
+   background-color: #4CAF50; /* Green color */
+   color: #fff;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   font-size: 1em;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.proceed-button:hover {
+   background-color: #45a049; /* Darker green for hover */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a href="#" class="logo">
+                    <i class="fas fa-bug logo-icon"></i> Insecticides
+                </a>
+                <ul class="nav-links">
+                    <!-- Add navigation links here -->
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search...">
+                    <button type="button" id="search-button">Search</button>
+                    <div id="suggestions" class="suggestions"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Insecticides</h1>
+<p>Highly Effective, Safe for Use, and Eco-Friendly Solutions</p>
+
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="products">
+        <h2>INSECTICIDES</h2>
+        <div class="product-grid">
+            <a href="acemain.HTML" class="product-item" data-aos="fade-up" data-name="Acemain">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2021-10/Acemain_650x550.webp?itok=_FHnKLEW" alt="Acemain">
+                <h3>ACEMAIN</h3>
+            </a>
+            <a href="agadig.html" class="product-item" data-aos="fade-up" data-name="Agadi G">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Agadi%20G_650x550.webp?itok=NR2qzeKf" alt="Agadi G">
+                <h3>AGADI G</h3>
+            </a>
+            
+            <a href="agadi sc.html" class="product-item" data-aos="fade-up" data-aos-delay="100" data-name="Agadi SC">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Agadi%20SC_650x550.webp?itok=YWBXy7-T" alt="Agadi SC">
+                <h3>AGADI SC</h3>
+            </a>
+            
+            <a href="agas.html" class="product-item" data-aos="fade-up" data-aos-delay="200" data-name="Agas">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Agas_650x550.webp?itok=NOD8yKGu" alt="Agas">
+                <h3>AGAS</h3>
+            </a>
+            
+            <a href="agadi super.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Agadi Super">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/product-images/Agadi-Super_tcm112-86847.webp?itok=HtxzNB5l" alt="Agadi Super">
+                <h3>AGADI SUPER</h3>
+            </a>
+            
+            <a href="barazide.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Barazide">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Barazide_650x550.webp?itok=jf-MSmww" alt="Barazide">
+                <h3>BARAZIDE</h3>
+            </a>
+            
+            <a href="bipimain.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Bipimain">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Bipimain_650x550.webp?itok=cj3R9tNz" alt="Bipimain">
+                <h3>BIPIMAIN</h3>
+            </a>
+            <a href="boregang.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Boragen G">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Boregan%20G_650x550.webp?itok=3h12eyrI" alt="Boregan G">
+                <h3>BOREGAN G</h3>
+            </a>
+            <a href="boregan sp.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Boragen SP">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Boregan%20SP_650x550.webp?itok=_VSzzG4n" alt="Boregan SP">
+                <h3>BOREGAN SP</h3>
+            </a>
+            
+            <a href="barroz.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Barroz">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Barroz%20Newpack_560x492.webp?itok=8JGbWJpE" alt="Barroz">
+                <h3>BARROZ</h3>
+            </a>
+            
+            <a href="carbomain.HTML" class="product-item" data-aos="fade-up" data-name="Carbomain">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Carbomain_650x550.webp?itok=2d39ekd2" alt="Carbomain">
+                <h3>CARBOMAIN</h3>
+            </a>
+            <a href="imperial.html" class="product-item" data-aos="fade-up" data-name="Imperial">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_teaser_mobile/public/2024-04/Imperial_650x550.webp?h=80d6026f&itok=zDMwIekn" alt="Imperial">
+                <h3>IMPERIAL</h3>
+            </a>
+            <a href="harrier.html" class="product-item" data-aos="fade-up" data-aos-delay="100" data-name="Harrier">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Harrier_650x550.webp?itok=Hm88iQgF" alt="Harrier">
+                <h3>HARRIER</h3>
+            </a>
+            
+            <a href="enfuse.html" class="product-item" data-aos="fade-up" data-aos-delay="200" data-name="Enfuse">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Enfuse_650x550.webp?itok=EpJKLmrv" alt="Enfuse">
+                <h3>ENFUSE</h3>
+            </a>
+            
+            
+            <a href="lamdex.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Lamdex">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_desktop/public/2024-04/Lamdex_650x550.webp?itok=DZ6XPD3O" alt="Lamdex">
+                <h3>LAMDEX</h3>
+            </a>
+            <a href="lamdex super.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Lamdex Super">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Lamdex%20Super_650x550.webp?itok=mHy2wTPJ" alt="Lamdex Super">
+                <h3>LAMDEX SUPER</h3>
+            </a>
+            
+            <a href="mainstar.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Mainstar">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Mainstar_650x550.webp?itok=vC-vAeGG" alt="Mainstar">
+                <h3>MAINSTAR</h3>
+            </a>
+            
+            <a href="monomain.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Monomain">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/product-images/Monomain_tcm112-86860.webp?itok=Ivy4FFo_" alt="Monomain">
+                <h3>MONOMAIN</h3>
+            </a>
+            
+            <a href="parviz.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Parviz">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/product-images/Parviz_tcm112-86786.webp?itok=m6UEv_I_" alt="Parviz">
+                <h3>PARVIZ</h3>
+            </a>
+
+            <a href="plethora.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Plethora">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Plethora_650x550.webp?itok=ZwaGyHis" alt="Plethora">
+                <h3>PLETHORA</h3>
+            </a>
+
+            <a href="pedestal.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Pedestal">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_teaser_mobile/public/2024-04/Pedestal_650x550.webp?h=80d6026f&itok=HLodaWdT" alt="Pedestal">
+                <h3>PEDESTAL</h3>
+            </a>
+            
+            <a href="pedestal supra.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Pedestal Supra">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/product-images/Pedestal-Supra_tcm112-49246.webp?itok=eSheouK2" alt="Pedestal Supra"  >
+                <h3>PEDESTAL SUPRA</h3>
+            </a>
+            
+            <a href="profigan.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Profigan">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Profigan_650x550.webp?itok=6WYY4AX0" alt="Profigan">
+                <h3>PROFIGAN</h3>
+            </a>
+
+            <a href="profigan plus.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Profigan Plus">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_teaser_mobile/public/2024-04/Profigan%20Plus_650x550.webp?h=80d6026f&itok=Ug9aaXQK" alt="Profigan Plus">
+                <h3>PROFIGAN PLUS</h3>
+            </a>
+            
+            <a href="sigalit.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sigalit">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Sigalit_650x550.webp?itok=m4t3bQ2r" alt="Sigalit">
+                <h3>SIGALIT</h3>
+            </a>
+
+            <a href="suckgan.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Suckgan">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Suckgan_650x550.webp?itok=hcf_sKUd" alt="Suckgan">
+                <h3>SUCKGAN</h3>
+            </a>
+            
+            <a href="tapuz.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Tapuz">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Tapuz_650x550.webp?itok=DgacWF2u" alt="Tapuz">
+                <h3>TAPUZ</h3>
+            </a>
+            
+            <a href="takaf.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Takaf">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Takaf_650x550.webp?itok=-cSPHCOh" alt="Takaf">
+                <h3>TAKAF</h3>
+            </a>
+            
+            <a href="trassid.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Trassid">
+                <img src="https://www.adama.com/india/sites/adama_india/files/styles/product_header_image_mobile/public/2024-04/Trassid_650x550.webp?itok=vuMiBSKP" alt="Trassid">
+                <h3>TRASSID</h3>
+            </a>
+            
+            <a href="defender.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Defender">
+                <img src="https://www.bestagrolife.com/img/DEFENDER-for-WEB.png" alt="DEFENDER" style="width: 180px; height: 230px;">
+                <h3>DEFENDER</h3>
+            </a>
+            
+            <a href="fasten.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Fasten">
+                <img src="https://www.bestagrolife.com/img/Fasten.png" alt="Fasten" style="width: 100px; height: 220px;">
+                <h3>FASTEN</h3>
+            </a>
+            
+            <a href="Spinosher..html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Spinosher">
+                <img src="https://www.bestagrolife.com/img/Spinosher.png" alt="Spinosher" style="width: 120px; height: 220px;">
+                <h3>SPINOSHER</h3>
+            </a>
+            
+            <a href="cubax power.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="CubaxPower">
+                <img src="https://www.bestagrolife.com/img/CubaxPower.webp" alt="Cubax Power" style="width: 140px; height: 220px;">
+                <h3>CUBAX POWER</h3>
+            </a>
+            
+            <a href="citigen.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Citigen">
+                <img src="https://www.bestagrolife.com/img/Citigen.webp" alt="Citigen" style="width: 180px; height: 220px;">
+                <h3>CITIGEN</h3>
+            </a>
+            
+            <a href="vastara.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Vistara">
+                <img src="https://www.bestagrolife.com/img/Vistara.png" alt="Vistara" style="width: 250px; height: 220px;">
+                <h3>VISTARA</h3>
+            </a>
+            <a href="spintocon.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Spintocon">
+                <img src="https://www.bestagrolife.com/img/Spintocon.png" alt="Spintocon" style="width: 120px; height: 220px;">
+                <h3>SPINTOCON</h3>
+            </a>
+            <a href="carto50.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Carto 50">
+                <img src="https://www.bestagrolife.com/img/carto_50_3d.png" alt="Carto 50" style="width: 160px; height: 220px;">
+                <h3>CARTO 50</h3>
+            </a>
+            <a href="nemagen.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Nemagen">
+                <img src="https://www.bestagrolife.com/img/NEMAGEN.png" alt="Nemagen" style="width: 110px; height: 220px;">
+                <h3>NEMAGEN</h3>
+            </a>
+            <a href="best 4g.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Best 4G">
+                <img src="https://www.bestagrolife.com/img/Best_4g.png" alt="Best 4G" style="width: 150px; height: 220px;">
+                <h3>BEST 4G</h3>
+            </a>
+            <a href="ghotu.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ghotu">
+                <img src="https://www.bestagrolife.com/img/Ghotu.webp" alt="Ghotu" style="width: 180px; height: 220px;">
+                <h3>GHOTU</h3>
+            </a>
+            <a href="reveal.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Reveal">
+                <img src="https://www.bestagrolife.com/img/Reveal.webp" alt="Reveal" style="width: 100px; height: 220px;">
+                <h3>REVEAL</h3>
+            </a>
+            <a href="ronfen.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ronfen">
+                <img src="https://www.bestagrolife.com/img/ronfenNew.png" alt="Ronfen" style="width: 170px; height: 220px;">
+                <h3>RONFEN</h3>
+            </a>
+            <a href="axeman.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Axeman">
+                <img src="https://www.bestagrolife.com/img/Axeman.webp" alt="Axeman" style="width: 170px; height: 220px;">
+                <h3>AXEMAN</h3>
+            </a>
+            <a href="mastery.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Mastery">
+                <img src="https://www.bestagrolife.com/img/mastery.webp" alt="Mastery" style="width: 130px; height: 220px;">
+                <h3>MASTERY</h3>
+            </a>
+            <a href="irma.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Irma">
+                <img src="https://www.bestagrolife.com/img/newirma.png" alt="Irma" style="width: 160px; height: 220px;">
+                <h3>IRMA</h3>
+            </a>
+            <a href="mahabali.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Mahabali">
+                <img src="https://www.bestagrolife.com/img/mahabali.webp" alt="Mahabali" style="width: 130px; height: 220px;">
+                <h3>MAHABALI</h3>
+            </a>
+            <a href="novoxa.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Novoxa">
+                <img src="https://www.bestagrolife.com/img/novoxa.webp" alt="Novoxa" style="width: 110px; height: 220px;">
+                <h3>NOVOXA</h3>
+            </a>
+            <a href="pymax.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Pymax">
+                <img src="https://www.bestagrolife.com/img/pymax.webp" alt="Pymax" style="width: 140px; height: 220px;">
+                <h3>PYMAX</h3>
+            </a>
+            <a href="diron.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Diron">
+                <img src="https://www.bestagrolife.com/img/diron.webp" alt="Diron" style="width: 140px; height: 220px;">
+                <h3>DIRON</h3>
+            </a>
+            <a href="pydon.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Pydon">
+                <img src="https://www.bestagrolife.com/img/pydon.webp" alt="Pydon" style="width: 120px; height: 220px;">
+                <h3>PYDON</h3>
+            </a>
+            <a href="cubax.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Cubax">
+                <img src="https://www.bestagrolife.com/img/cubex4.webp" alt="Cubax" style="width: 120px; height: 220px;">
+                <h3>CUBAX</h3>
+            </a>
+            <a href="poros.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Poros">
+                <img src="https://www.bestagrolife.com/img/poros.webp" alt="Poros" style="width: 100px; height: 220px;">
+                <h3>POROS</h3>
+            </a>
+            <a href="lakra.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Lakra">
+                <img src="https://www.bestagrolife.com/img/lakra.webp" alt="Lakra" style="width: 120px; height: 220px;">
+                <h3>LAKRA</h3>
+            </a>
+            <a href="throne.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Throne">
+                <img src="https://www.bestagrolife.com/img/throne.webp" alt="Throne" style="width: 140px; height: 220px;">
+                <h3>THRONE</h3>
+            </a>
+            <a href="sypro-c.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sypro-C">
+                <img src="https://i.postimg.cc/wByqw7N5/syproc-peview-rev-1.jpg" alt="Sypro-C" style="width: 220px; height: 220px;">
+                <h3>SYPRO-C</h3>
+            </a>
+            <a href="sytara.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sytara">
+                <img src="https://iili.io/dxU0GLu.jpg" alt="Sytara" style="width: 240px; height: 220px;">
+                <h3>SYTARA</h3>
+            </a>
+
+            <a href="sylambda.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sylambda">
+                <img src="https://i.postimg.cc/Gp8WZSx6/sylambda.png" alt="Sylambda" style="width: 200px; height: 220px;">
+                <h3>SYLAMBDA</h3>
+            </a>
+
+            <a href="sypronil.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sypronil">
+                <img src="https://i.postimg.cc/QF3XmpK8/sypronil.jpg" alt="Sypronil" style="width:200px; height: 220px;">
+                <h3>SYPRONIL</h3>
+            </a>
+
+            <a href="symida.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Symida">
+                <img src="https://i.postimg.cc/jD7Q5QKH/Pasted-20241025-182733-preview-rev-1.jpg" alt="Symida" style="width:180px; height: 220px;">
+                <h3>SYMIDA</h3>
+            </a>
+
+            <a href="symida top.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Symida top">
+                <img src="https://i.postimg.cc/02gNF2Q9/symbda-top-preview-rev-1-1.jpg" alt="Symida top" style="width: 200px; height: 220px;">
+                <h3>SYMIDA TOP</h3>
+            </a>
+
+            <a href="syema.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Syema">
+                <img src="https://i.postimg.cc/15rtwr3F/syema-preview-rev-1.jpg" alt="Syema" style="width: 200px; height: 220px;">
+                <h3>SYEMA</h3>
+            </a>
+            
+            <a href="syaceta.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Syaceta">
+                <img src="https://i.postimg.cc/V6TXZ0wy/syaceta-preview-rev-1-preview-rev-1.jpg" alt="Syaceta" style="width: 240px; height: 220px;">
+                <h3>SYACETA</h3>
+            </a>
+            
+            <a href="sylice.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sylice">
+                <img src="https://iili.io/dxrRcP4.jpg" alt="Sylice" style="width: 240px; height: 220px;">
+                <h3>SYLICE</h3>
+            </a>
+            
+            <a href="sy-505.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sy-505">
+                <img src="https://iili.io/dx4ccJ4.jpg" alt="SY-505" style="width: 200px; height: 220px;">
+                <h3>SY-505</h3>
+            </a>
+            
+            <a href="symono.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Symono">
+                <img src="https://iili.io/dx46N3u.jpg" alt="Symono" style="width:240px; height: 220px;">
+                <h3>SYMONO</h3>
+            </a>
+            
+            <a href="sycart.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Sycart">
+                <img src="https://iili.io/dx6ysdQ.jpg" alt="Sycart" style="width: 240px; height: 220px;">
+                <h3>SYCART</h3>
+            </a>
+            
+            <a href="virtako.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Virtako">
+                <img src="https://th.bing.com/th/id/R.a63e3dd3bf21a677fb41f4053cef997e?rik=jaXPGZYwtnAtfg&riu=http%3a%2f%2fwww.resetagri.in%2fcdn%2fshop%2fproducts%2f41lAb4mvWfL.jpg%3fv%3d1689321435&ehk=yqU1kMvDIUB3%2bvfN1p3rDAZvM%2fJreuCEOzchkymhQoU%3d&risl=&pid=ImgRaw&r=0" alt="Virtako" style="width: 220px; height:220px;">
+                <h3>VIRTAKO</h3>
+            </a>
+
+            <a href="evicent.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Evicent">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2022/6/YB/PR/VL/59373149/evicent-500x500.jpg" alt="Evicent" style="width: 220px; height: 240px;">
+                <h3>EVICENT</h3>
+            </a>
+
+            <a href="minecto xtra.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Minecto Xtra">
+                <img src="https://cdn.shopify.com/s/files/1/0722/2059/files/NewProduct_43_4ff2be55-e9a0-48e1-bf67-c3a08dde8eb0.png?v=1699010011" alt="Minecto Xtra" style="width: 220px; height: 240px;">
+                <h3>MINECTO XTRA</h3>
+            </a>
+
+            <a href="ampligo.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ampligo">
+                <img src="https://cdn.dotpe.in/longtail/item_thumbnails/6792607/5PZiBwf8.webp" alt="Ampligo" style="width: 220px; height: 220px;">
+                <h3>AMPLIGO</h3>
+            </a>
+            
+            <a href="chess.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Chess">
+                <img src="https://iili.io/dzIDibt.jpg" alt="Chess" style="width: 240px; height: 220px;">
+                <h3>CHESS</h3>
+            </a>
+            
+            <a href="plesiva.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Plesiva">
+                <img src="https://th.bing.com/th/id/OIP.KuGjfKaFT2fGTGJZIMnzkwAAAA?rs=1&pid=ImgDetMain" alt="Plesiva" style="width: 220px; height: 220px;">
+                <h3>PLESIVA</h3>
+            </a>
+            
+            <a href="simodis.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Simodis">
+                <img src="https://th.bing.com/th/id/OIP.SsvCldKl830efOeD-9zzIgHaHa?rs=1&pid=ImgDetMain" alt="Simodis" style="width: 220px; height: 220px;">
+                <h3>SIMODIS</h3>
+            </a>
+            
+            <a href="pegasus.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Pegasus">
+                <img src="https://wendell-trading.com/wp-content/uploads/PEGASUS-250SC_0793.jpg" alt="Pegasus" style="width: 240px; height: 220px;">
+                <h3>PEGASUS</h3>
+            </a>
+            
+            <a href="polozapp.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Polo Zapp">
+                <img src="https://www.kissanemart.com/storage/polozaap-insecticide-800x800.jpg" alt="Polo Zapp" style="width: 240px; height: 220px;">
+                <h3>POLO ZAPP</h3>
+            </a>
+            
+            <a href="phantom.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Phantom">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-792093481.jpg" alt="Phantom" style="width: 100px; height: 220px;">
+                <h3>PHANTOM</h3>
+            </a>
+
+            <a href="ayuclaim.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayuclaim">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-1218384832.jpeg" alt="Ayuclaim" style="width: 180px; height: 220px;">
+                <h3>AYUCLAIM</h3>
+            </a>
+
+            <a href="nelsa.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="nelsa">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-1588198204.jfif" alt="nelsa" style="width: 150px; height: 220px;">
+                <h3>NELSA</h3>
+            </a>
+
+            <a href="ayustara.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayustara">
+                <img src="https://www.ayushicropscience.com/public/storage/product/Qcdmv9Bkkg0lbpG6Uetd.jpg" alt="Ayustara" style="width: 120px; height: 220px;">
+                <h3>AYUSTARA</h3>
+            </a>
+
+            <a href="ayustara-75.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayustara-75">
+                <img src="https://www.ayushicropscience.com/public/storage/product/2Wue6lSPI0F1wlMjUL8m.jpg" alt="Ayustara-75" style="width:170px; height: 220px;">
+                <h3>AYUSTARA - 75</h3>
+            </a>
+
+            <a href="ayuban.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayuban 20">
+                <img src="https://www.ayushicropscience.com/public/storage/product/KAC4m93RdToUx9ZJ0hvN.jpg" alt="Ayuban 20" style="width:170px; height: 220px;">
+                <h3>AYUBAN 20</h3>
+            </a>
+
+            <a href="ayuban50.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayuban 50">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-966562829.jpg" alt="Ayuban 50" style="width:90px; height: 220px;">
+                <h3>AYUBAN 50</h3>
+            </a>
+
+            <a href="ayuban 505.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Ayuban-505">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-1628033806.jpg" alt="Ayuban-505" style="width:90px; height: 220px;">
+                <h3>AYUBAN-505</h3>
+            </a>
+
+            <a href="allcron super.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="allcron super">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-1414715050.jpg" alt="allcron super" style="width:90px; height: 220px;">
+                <h3>ALLCRON SUPER</h3>
+            </a>
+
+            <a href="confidant super.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Confidant Super">
+                <img src="https://www.ayushicropscience.com/public/storage/product/gbNBOd2fmDUKdvQCMeHO.jpg" alt="Confidant Super" style="width: 170px; height: 220px;">
+                <h3>CONFIDANT SUPER</h3>
+            </a>
+
+            <a href="confidant extra.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Confidant extra">
+                <img src="https://www.ayushicropscience.com/public/storage/product/VjHCM3hMNgItIFcK0aB8.jpg" alt="Confidant extra" style="width: 170px; height: 220px;">
+                <h3>CONFIDANT EXTRA</h3>
+            </a>
+
+            <a href="cyperpro.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Cyper Pro">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-831188826.jpg" alt="Cyper Pro" style="width: 90px; height: 220px;">
+                <h3>CYPER PRO</h3>
+            </a>
+
+            <a href="nelsa.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Nelsa">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-1588198204.jfif" alt="Nelsa" style="width: 160px; height: 220px;">
+                <h3>NELSA</h3>
+            </a>
+
+            <a href="katera.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Katera">
+                <img src="https://www.ayushicropscience.com/public/storage/product/product-373386967.jpg" alt="Katera" style="width: 170px; height: 220px;">
+                <h3>KATERA</h3>
+            </a>
+
+            <a href="deltramax11.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Deltramax-11">
+                <img src="https://www.ayushicropscience.com/public/storage/product/eoGCCSOSS3byQCECy7U9.jpg" alt="Deltramax-11" style="width: 170px; height: 220px;">
+                <h3>DELTRAMAX-11</h3>
+            </a>
+
+            <a href="letham.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Letham">
+                <img src="https://www.ayushicropscience.com/public/storage/product/dcznlIBMNcgmItynZKbe.jpg" alt="Letham" style="width: 120px; height: 220px;">
+                <h3>LETHAM</h3>
+            </a>
+
+            <a href="revolt.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Revolt">
+                <img src="https://iili.io/dIH4M8l.jpg" alt="Revolt" style="width: 220px; height: 220px;">
+                <h3>REVOLT</h3>
+            </a>
+            
+            <a href="merit.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Merit">
+                <img src="https://iili.io/dIzC41e.jpg" alt="Merit" style="width: 260px; height: 220px;">
+                <h3>MERIT</h3>
+            </a>
+            
+            <a href="amaze.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Amaze">
+                <img src="https://iili.io/dIIA5v9.jpg" alt="Amaze" style="width: 260px; height: 220px;">
+                <h3>AMAZE</h3>
+            </a>
+            
+            <a href="prado.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Prado">
+                <img src="https://iili.io/dIT3lbS.jpg" alt="Prado" style="width: 220px; height: 220px;">
+                <h3>PRADO</h3>
+            </a>
+            
+            <a href="bigboss.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Bigboss">
+                <img src="https://iili.io/dIT6Oj2.jpg" alt="Bigboss" style="width: 180px; height: 220px;">
+                <h3>BIGBOSS</h3>
+            </a>
+            
+            <a href="starwar.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Star War">
+                <img src="https://iili.io/dIjKyWx.jpg" alt="Star War" style="width: 200px; height: 220px;">
+                <h3>STAR WAR</h3>
+            </a>
+            
+            <a href="prodan.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Prodan">
+                <img src="https://iili.io/dIj7egn.jpg" alt="Prodan" style="width: 200px; height: 220px;">
+                <h3>PRODAN</h3>
+            </a>
+            
+            <a href="regal.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Regal">
+                <img src="https://iili.io/dIjO1Np.jpg" alt="Regal" style="width: 200px; height: 220px;">
+                <h3>REGAL</h3>
+            </a>
+            <a href="status.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Status">
+                <img src="https://iili.io/dIOfUAP.jpg" alt="Status" style="width: 200px; height: 220px;">
+                <h3>STATUS</h3>
+            </a>
+            
+            <a href="fida.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Fida">
+                <img src="https://iili.io/dISncPI.jpg" alt="Fida" style="width: 180px; height: 220px;">
+                <h3>FIDA</h3>
+            </a>
+            
+           
+            <a href="natgen.html" class="product-item" data-aos="fade-up" data-aos-delay="300" data-name="Natgen">
+                <img src="https://iili.io/dl1IGbS.jpg" alt="natgen" style="width: 180px; height: 220px;">
+                <h3>NATGEN</h3>
+            </a>
+            </div>
+    </section>
+            <footer>
+              
+                <div id="footer">
+                    <footer>
+                      <div class="footer-top">
+                      <div class="logo-container">
+                <img src="https://iili.io/dj90yMX.png" alt="Agro Pest Logo" class="footer-logo">
+                          <h2>Agro Pest</h2>
+                      </div>
+                          <p>Your Trusted Partner in Agricultural Solutions</p>
+                
+                      </div>
+                      <footer class="py-5">
+                          <div class="row">
+                            <div class="col-6 col-md-2 mb-3">
+                              <h5>Our Products</h5>
+                            <ul class="nav flex-column">
+                                    <li class="nav-item mb-2">
+                                    <a href="insecticides.html" class="nav-link p-0 text-body-secondary">
+                                      <i class="fas fa-bug"></i> Insecticides
+                                    </a>
+                                  </li>
+                                  <li class="nav-item mb-2">
+                                    <a href="herbicides.html" class="nav-link p-0 text-body-secondary">
+                                      <i class="fas fa-seedling"></i> Herbicides
+                                    </a>
+                                  </li>
+                                  <li class="nav-item mb-2">
+                                    <a href="fungicides.html" class="nav-link p-0 text-body-secondary">
+                                      <i class="fas fa-bacteria"></i> Fungicides
+                                    </a>
+                                  </li>
+                                  <li class="nav-item mb-2">
+                                    <a href="organicnutrients.html" class="nav-link p-0 text-body-secondary">
+                                      <i class="fas fa-leaf"></i> Organic Nutrients
+                                    </a>
+                                  </li>
+                                  <li class="nav-item mb-2">
+                                    <a href="pest-traps.html" class="nav-link p-0 text-body-secondary">
+                                      <i class="fas fa-square"></i> Pest Traps
+                                    </a>
+                                  </li>
+                                </ul>
+                                   
+                            </div>
+                      
+                            <div class="col-6 col-md-2 mb-3">
+                              <h5>Connect With Us</h5>
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                    <a href="https://wa.me/9014255803?text=Hello%20Agro%20Pest" class="nav-link p-0 text-body-secondary" target="_blank">
+                      <i class="fab fa-whatsapp"></i> Whatsapp
+                    </a>
+                </li>
+                
+                <li class="nav-item mb-2">
+                    <a href="https://www.instagram.com/agro_pest_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="nav-link p-0 text-body-secondary">
+                      <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                  </li>
+                </ul>
+                            </div>
+                     
+                            <div class="col-6 col-md-2 mb-3">
+                              <h5>Visit Our Location</h5>
+                              <ul class="nav flex-column">
+                                  <li class="nav-item mb-2">
+                                      <a href="https://maps.app.goo.gl/SRzxZjUsdS8wWKy86" 
+                                         class="nav-link p-0 text-body-secondary" target="_blank">
+                                        <i class="fas fa-store"></i> Jogulamba Traders
+                                      </a>
+                                    </li>
+                                    <li class="nav-item mb-2">
+                                      <a href="https://maps.app.goo.gl/U7qPc9AHLfeKnKcFA" 
+                                         class="nav-link p-0 text-body-secondary" target="_blank">
+                                        <i class="fas fa-store"></i> Bhavani Traders
+                                      </a>
+                                    </li>
+                            </div>
+                
+                            <div class="col-md-5 offset-md-1 mb-3">
+                              <form>
+                                <h5>Feedback to AGRO PEST</h5>
+                                <h6>Get the latest updates and offers from Agro Pest.</h6>
+                                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                                  <label for="newsletter1" class="visually-hidden">Feedback</label>
+                                  <input id="newsletter1" type="text" class="form-control" placeholder="Feedback">
+                                  <button class="proceed-button">Proceed</button>
+                
+                              </div>
+                              </form>
+                            </div>
+                          </div>   
+                  </footer>
+                  <marquee behavior="scroll" direction="left">
+                    <span>
+                      <h4 style="display:inline;"> BHAVANI TRADERS & JOGULAMBA TRADERS </h4>
+                      <h5 style="display:inline;"> - Insecticides, Herbicides, Fungicides, Organic Nutrients, Pest Traps</h5>
+                      <h5 style="display:inline;" color="black;"> -Meet us at Bhavani Traders, Ananthapuram Village, Gadwal Mandal, Jogulamba Gadwal District & Jogulamba Traders, Kodandapuram Village, Itikyala Mandal, Jogulamba Gadwal District, Contact us
+                        - 9014255803, 9640495352</h5>
+                    </span>
+                  </marquee>
+                
+                  </div>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('search-input');
+                const searchButton = document.getElementById('search-button');
+                const suggestionsContainer = document.getElementById('suggestions');
+                const productItems = Array.from(document.querySelectorAll('.product-item'));
+                let activeSuggestionIndex = -1;
+                const suggestions = [];
+            
+                // Prepare data for Fuse.js
+                const products = productItems.map(item => ({
+                    element: item,
+                    name: item.getAttribute('data-name'),
+                    href: item.getAttribute('href')
+                }));
+            
+                const fuse = new Fuse(products, {
+                    keys: ['name'],
+                    includeScore: true
+                });
+            
+                function displaySuggestions(results) {
+                    suggestionsContainer.innerHTML = results.map(({ item }) => 
+                        `<div class="suggestion-item" data-href="${item.href}">${item.name}</div>`
+                    ).join('');
+                    suggestionsContainer.style.display = 'block';
+                    suggestions.length = 0;
+                    results.forEach(({ item }) => suggestions.push(item));
+                }
+            
+                function handleSuggestionSelection(index) {
+                    if (index >= 0 && index < suggestions.length) {
+                        window.location.href = suggestions[index].href;
+                    }
+                }
+            
+                searchInput.addEventListener('input', () => {
+                    const query = searchInput.value.trim();
+                    
+                    if (query.length > 0) {
+                        const results = fuse.search(query);
+                        displaySuggestions(results);
+                    } else {
+                        suggestionsContainer.innerHTML = '';
+                        suggestionsContainer.style.display = 'none';
+                    }
+                    activeSuggestionIndex = -1; // Reset active suggestion index
+                });
+            
+                searchButton.addEventListener('click', () => {
+                    const query = searchInput.value.trim();
+                    
+                    if (query.length > 0) {
+                        // Disable search input and button
+                        searchInput.disabled = true;
+                        searchButton.disabled = true;
+            
+                        // Clear suggestions and hide the container
+                        suggestionsContainer.innerHTML = '';
+                        suggestionsContainer.style.display = 'none';
+            
+                        // Optionally: Display a message or handle further actions
+                    }
+                });
+            
+                suggestionsContainer.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('suggestion-item')) {
+                        window.location.href = e.target.getAttribute('data-href');
+                    }
+                });
+            
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.search-container')) {
+                        suggestionsContainer.style.display = 'none';
+                    }
+                });
+            
+                searchInput.addEventListener('keydown', (e) => {
+                    const key = e.key;
+            
+                    if (key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (activeSuggestionIndex < suggestions.length - 1) {
+                            activeSuggestionIndex++;
+                            updateSuggestionHighlight();
+                        }
+                    } else if (key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (activeSuggestionIndex > 0) {
+                            activeSuggestionIndex--;
+                            updateSuggestionHighlight();
+                        }
+                    } else if (key === 'Enter') {
+                        e.preventDefault();
+                        handleSuggestionSelection(activeSuggestionIndex);
+                    } else if (key === 'Escape') {
+                        suggestionsContainer.style.display = 'none';
+                        searchInput.blur();
+                    }
+                });
+            
+                function updateSuggestionHighlight() {
+                    const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
+                    suggestionItems.forEach((item, index) => {
+                        if (index === activeSuggestionIndex) {
+                            item.classList.add('active');
+                            item.scrollIntoView({ block: 'nearest' });
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+            </script>
+            
+            
+            </body>
+            </html>
+            
