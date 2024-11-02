@@ -1,0 +1,221 @@
+body{
+  background-color: white;
+}
+header{
+  background-color: green;
+}
+.carousel-image {
+  max-height: 550px; /* Adjust based on your preferred height */
+  object-fit: cover; /* Ensures all images fill the container proportionally */
+  width: 100%; /* Full width for responsiveness */
+}
+@media (max-width: 768px) {
+  .carousel-image {
+      max-height: 300px; /* Smaller height for smaller screens */
+  }
+}
+@media (max-width: 480px) {
+  .carousel-image {
+      max-height: 200px; /* Further reduce height for mobile devices */
+  }
+}
+.card-group {
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  gap: 20px; /* Gap between cards */
+  padding: 10px; /* Padding around the card group */
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+.card {
+  flex: 0 0 auto; /* Prevent cards from growing/shrinking */
+  width: 250px; /* Set a fixed width for cards */
+  border: 1px solid #ddd; /* Add border for better visibility */
+  border-radius: 5px; /* Round the corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Scale the card to 105% of its original size */
+}
+
+.card-img-top {
+  height: 200px; /* Increase the height of the images */
+  object-fit: cover; /* Cover the area of the image */
+}
+
+.card-body {
+  text-align: center; /* Center-align text in card body */
+}
+
+.btn {
+  margin-top: 10px; /* Add space above the button */
+}
+
+.pname{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aname{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px
+}
+.d-flex{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+#aboutp1{
+  transition: transform 0.3s ease;
+
+}
+#aboutp1:hover {
+  transform: scale(1.05); /* Scale the card to 105% of its original size */
+}
+#aboutp2{
+transition: transform 0.3s ease;
+
+}
+#aboutp2:hover {
+transform: scale(1.05); /* Scale the card to 105% of its original size */
+}
+#aboutp3{
+transition: transform 0.3s ease;
+
+}
+#aboutp3:hover {
+transform: scale(1.05); /* Scale the card to 105% of its original size */
+}
+/* Footer styles */
+footer {
+background-color: #14741c;
+color: #fff;
+text-align: center;
+padding: 20px 0;
+position: relative;
+}
+
+.footer-top {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.logo-container {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+}
+
+.footer-logo {
+width: 50px;
+height: auto;
+}
+
+.footer-top h2 {
+margin: 0;
+font-size: 2em;
+}
+
+.footer-top p {
+margin: 5px 0;
+font-size: 1.2em;
+}
+
+.footer-content {
+text-align: center;
+}
+
+.footer-content .social-icons {
+margin-top: 10px;
+}
+
+.footer-content .social-icon {
+color: #fff;
+margin: 0 10px;
+font-size: 1.5em;
+text-decoration: none;
+}
+
+.footer-content .social-icon:hover {
+color: #ffd700;
+}
+
+/* Proceed button styles */
+.proceed-button {
+background-color: #4CAF50; /* Green color */
+color: #fff;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+font-size: 1em;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.proceed-button:hover {
+background-color: #45a049; /* Darker green for hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+        .main-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .header-left,
+        .header-right {
+            margin-bottom: 10px;
+        }
+        .product-header {
+            flex-direction: column;
+        }
+        .header-content {
+            border-radius: 50% 50% 0 0;
+        }
+    }
+/* Add space between product info and footer */
+.product-detail {
+margin-bottom: 40px; /* Adjust this value to control the space between the product info and footer */
+}
+
+/* Footer styles */
+footer {
+background-color: #14741c;
+color: #fff;
+text-align: center;
+padding: 20px 0;
+position: relative;
+margin-top: 20px; /* You can also use margin-top here if needed */
+}
+/* Footer logo styles */
+.logo-container {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px; /* Space between image and text */
+overflow: hidden; /* Ensures no overflow of the image */
+}
+
+.footer-logo {
+width: 50px; /* Adjust size as needed */
+height: auto; /* Maintain aspect ratio */
+border-radius: 50%; /* Remove circular clipping */
+/* Optional: add a border if you want */
+border: 2px solid #fff; /* White border for visibility */
+object-fit: contain; /* Ensures the logo fits within the container without stretching */
+}
+.buttonBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 10px auto 35px;
+  }
