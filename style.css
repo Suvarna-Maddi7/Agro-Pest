@@ -529,7 +529,7 @@
     }
 
     .product-item {
-      background: #fff;
+      background: linear-gradient(135deg, #4ade80, #15803d, #065f46);
       border-radius: 25px;
       padding: 25px;
       text-align: center;
@@ -613,6 +613,7 @@
         grid-template-columns: 1fr;
       }
     }    
+
 
 
 
