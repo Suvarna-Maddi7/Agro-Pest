@@ -1,0 +1,3473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+/>
+<title>Agropest — Multi-Products Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ========== RESET / GLOBAL ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Poppins',sans-serif;color:#0f1d14;background:#f6fff7}
+img{max-width:100%;display:block;height:auto}
+button{font:inherit}
+
+/* Utility */
+.container{width:min(1200px,92%);margin-inline:auto}
+
+/* ========== HERO (Next-Gen) ========== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* Animated gradient mesh background */
+.hero::before{
+  content:"";
+  position:absolute; inset: -10% -20%;
+  background:
+    radial-gradient(40% 60% at 20% 20%, #b5ffc7 0%, transparent 60%),
+    radial-gradient(45% 60% at 80% 30%, #9ae6b4 0%, transparent 60%),
+    radial-gradient(60% 65% at 60% 80%, #d4fbb5 0%, transparent 60%),
+    linear-gradient(120deg,#ebfff1 0%,#f9fff9 100%);
+  filter: blur(30px) saturate(1.05);
+  animation: meshShift 18s ease-in-out infinite alternate;
+  z-index:-2;
+}
+@keyframes meshShift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-2%,1%,0) scale(1.03)}
+  100%{transform:translate3d(2%,-1%,0) scale(1.06)}
+}
+
+/* Soft grain overlay for depth */
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image:url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'>\
+    <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter>\
+    <rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/>\
+  </svg>");
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* Hero layout */
+.hero-inner{
+  width:min(1200px,92%);
+  display:grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items:center;
+  gap: clamp(24px,4vw,48px);
+  padding-block: clamp(40px,6vh,80px);
+}
+
+/* Left: Headline block */
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#e7f9ec;
+  color:#165f25;
+  font-weight:600;
+  width:max-content;
+  box-shadow:0 6px 20px rgba(22,95,37,.12);
+  margin-bottom:16px;
+}
+.kicker i{opacity:.8}
+
+.hero h1{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size: clamp(2.2rem, 4.8vw, 4rem);
+  line-height:1.05;
+  letter-spacing:.2px;
+  background: linear-gradient(90deg,#0f3d1d,#1a7a38,#0f3d1d);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: hue 12s linear infinite;
+  margin-bottom:14px;
+}
+@keyframes hue{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
+
+.hero p{
+  color:#274131;
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height:1.6;
+  max-width:60ch;
+  margin-bottom:22px;
+}
+
+/* CTA row */
+.cta-row{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:6px
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:.9rem 1.3rem;border-radius:18px;
+  border:1px solid #cdeed6;background:#0f7a34;color:#fff;
+  text-decoration:none;font-weight:600;
+  box-shadow:0 10px 25px rgba(15,122,52,.25);
+  transition:.28s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(15,122,52,.33);background:#0d6a2d}
+.btn.secondary{
+  background:#ffffff;color:#0f7a34;border-color:#bfe9ca;
+  box-shadow:0 8px 22px rgba(0,0,0,.06)
+}
+.btn.secondary:hover{transform:translateY(-2px);background:#f7fff9}
+
+/* Right: 3D Orbit */
+.orbit-wrap{
+  position:relative;height:min(520px,70vh);min-height:380px;
+  perspective:1000px;perspective-origin:50% 40%;
+}
+.orbit{
+  position:absolute;inset:0;margin:auto;
+  width:min(560px,80vw);height:min(560px,80vw);
+  transform-style:preserve-3d;
+  animation: spin 26s linear infinite;
+  filter: drop-shadow(0 18px 35px rgba(0,0,0,.12));
+}
+@keyframes spin{
+  to{transform:rotateY(360deg)}
+}
+.orbit:hover{animation-play-state:paused}
+
+/* Orbit items (use your product/category images) */
+.orbit .node{
+  --i:0; /* index set inline */
+  position:absolute;top:50%;left:50%;
+  width:110px;height:110px;border-radius:26px;overflow:hidden;
+  transform-style:preserve-3d;
+  transform:
+    rotateY(calc(var(--i)*45deg))
+    translateZ(160px)
+    rotateY(calc(-1*var(--i)*45deg));
+  border:4px solid #e9f8ee;
+  background:#fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.12);
+  transition: transform .3s ease;
+}
+.node img{width:100%;height:100%;object-fit:cover}
+.node span{
+  position:absolute;inset:auto 8px 8px 8px;
+  background:rgba(0,0,0,.55);color:#fff;
+  padding:6px 8px;border-radius:12px;font-size:.78rem;
+  backdrop-filter: blur(4px);
+}
+
+/* Ticker belt */
+.ticker{
+  position:absolute;left:0;right:0;bottom:12px;
+  overflow:hidden;pointer-events:none
+}
+.ticker-track{
+  display:flex;gap:28px;white-space:nowrap;
+  animation: marquee 18s linear infinite;
+  color:#0e4d24;font-weight:600;opacity:.8
+}
+.ticker-track i{opacity:.7;margin-right:6px}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ========== FILTER BAR ========== */
+.filter-bar{
+  position:sticky;top:0;z-index:10;background:#ffffffee;
+  backdrop-filter:saturate(1.2) blur(8px);
+  border-bottom:1px solid #e7f4ea;
+}
+.filter-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  border:1px solid #cfe9d7;background:#f5fff8;color:#165f25;
+  padding:8px 12px;border-radius:999px;font-weight:600;font-size:.95rem;
+  cursor:pointer;transition:.2s;user-select:none
+}
+.chip.active,.chip:hover{background:#0f7a34;color:#fff;border-color:#0f7a34}
+
+@media (max-width: 600px){
+  .filter-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chips {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+/* ========== GRID ========== */
+.grid{
+  padding-block:42px 80px;
+  display:grid;gap:26px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.card{
+  background:#fff;border:1px solid #e8f4eb;border-radius:22px;
+  overflow:hidden;box-shadow:0 12px 26px rgba(0,0,0,.06);
+  transform:translateY(12px);opacity:0;transition:.45s ease;
+}
+.card.visible{transform:translateY(0);opacity:1}
+.card-media{
+  position:relative;aspect-ratio: 16/11;overflow:hidden
+}
+.card-media img{width:100%;height:100%;object-fit:cover;transition: transform .6s ease}
+.card:hover .card-media img{transform: scale(1.05)}
+.badge{
+  position:absolute;left:12px;top:12px;
+  background:#0f7a34;color:#fff;padding:6px 10px;border-radius:999px;font-size:.8rem
+}
+.card-body{padding:16px 16px 18px}
+.card h3{font-size:1.05rem;color:#0f3d1d;margin-bottom:6px}
+.card p{font-size:.92rem;color:#31493b;margin-bottom:12px}
+.meta{display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:700;color:#0f7a34}
+.quick{border:none;background:#e9f8ee;color:#0f7a34;font-weight:700;padding:8px 12px;border-radius:12px;cursor:pointer}
+.quick:hover{background:#d7f3e1}
+
+/* ========== MODAL (Quick View) ========== */
+.modal{
+  position:fixed;inset:0;display:grid;place-items:center;
+  background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:.25s
+}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-card{
+  width:min(900px,92%);background:#fff;border-radius:20px;overflow:hidden;
+  display:grid;grid-template-columns: 1fr 1fr;
+}
+.modal-media{aspect-ratio: 1/1;background:#f3fbf6}
+.modal-media img{width:100%;height:100%;object-fit:cover}
+.modal-body{padding:20px 20px 22px}
+.modal-body h3{font-family:'Montserrat',sans-serif;font-size:1.6rem;margin-bottom:6px}
+.modal-body p{color:#33463a;line-height:1.6;margin-bottom:14px}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+.close{
+  position:absolute;top:14px;right:16px;border:none;background:#fff;border-radius:999px;
+  width:36px;height:36px;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.12);cursor:pointer
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1100px){
+  .hero-inner{grid-template-columns:1fr;gap:28px}
+  .orbit-wrap{order:-1;height:min(320px,50vh)}
+}
+@media (max-width: 800px){
+  .grid{grid-template-columns: repeat(2,2fr)}
+}
+@media (max-width: 520px){
+  .grid{grid-template-columns: repeat(2, 1fr);} /* 2 equal columns */
+  .orbit .node{width:92px;height:92px;border-radius:20px}
+}
+
+@media (max-width: 412px){
+  .grid{grid-template-columns: repeat(2, 1fr);} /* keep 2 columns */
+}
+
+@media (max-width: 400px){
+  .grid{grid-template-columns: repeat(2, 1fr);} /* finally switch to 1 column */
+  .modal-card{grid-template-columns:1fr}
+}
+
+
+/* Motion-reduced accessibility */
+@media (prefers-reduced-motion: reduce){
+  .hero::before, .orbit, .ticker-track{animation:none}
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4ade80, #15803d, #065f46);
+  background-size: 300% 300%;
+  animation: gradientFlow 8s ease infinite;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Animated Gradient */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Faded Bottom */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+/* background: linear-gradient(to bottom, rgba(232, 228, 228, 0.933), transparent);*/
+}
+
+/* Brand Name */
+.brand {
+  font-family: 'cinzel', serif;
+  font-size: 2rem;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, text-shadow 0.4s ease;
+
+}
+.brand:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 15px rgba(255,255,255,0.7);
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+.nav-links a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background: white;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.nav-links a:hover {
+  color: #f0fdf4;
+}
+
+/* Toggle Button */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+  z-index: 2000;
+}
+.menu-toggle span {
+  background: white;
+  height: 3px;
+  width: 25px;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: all 0.5s ease-in-out;
+}
+
+
+/* Toggle Morph Animation */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(90deg) translateY(-8px);
+}
+.menu-toggle.active span:nth-child(2) {
+  transform: rotate(90deg);
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(90deg) translateY(8px);
+}
+
+
+/* MOBILE MENU */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #4ade80, #15803d, #065f46);
+    background-size: 300% 300%;
+    animation: gradientFlow 8s ease infinite;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.4s ease;
+  }
+  .nav-links.show {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links a {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: linkStagger 0.5s ease forwards;
+  }
+  .nav-links.show a:nth-child(1) { animation-delay: 0.2s; }
+  .nav-links.show a:nth-child(2) { animation-delay: 0.4s; }
+  .nav-links.show a:nth-child(3) { animation-delay: 0.6s; }
+  .nav-links.show a:nth-child(4) { animation-delay: 0.8s; }
+
+  @keyframes linkStagger {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+}
+/* === Nature Background Animation for Mobile Menu === */
+.nav-links.show::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* cover full menu */
+  background: url("footer.jpg") no-repeat center center/cover;
+  opacity: 0.4; /* adjust transparency */
+  z-index: -1; /* behind menu items */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+
+  padding: 10px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+}
+
+.nav-links a:hover {
+  
+  border-radius: 4px;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color:white;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  z-index: 1;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 10px 17 px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+
+}   
+
+.footer {
+      position: relative;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .footer-img {
+      width: 100%;
+      height: 250px; /* default height */
+      display: block;
+      object-fit: cover;
+      opacity: 0.6; /* updated opacity */
+    }
+
+    .footer-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .footer h2 {
+      margin-bottom: 10px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #00ff88;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 22px;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #00ff88;
+    }
+
+    .footer-details {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-details p {
+      margin: 4px 0;
+    }
+
+    .copyright {
+      margin-top: 10px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* Laptop/Desktop View - decrease image height */
+    @media (min-width: 768px) {
+      .footer-img {
+        height: 350px; /* reduced size for larger screens */
+      }
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 600px) {
+      .footer h2 {
+        font-size: 20px;
+      }
+      .footer-links {
+        gap: 10px;
+      }
+      .footer-links a {
+        font-size: 14px;
+      }
+      .social-icons a {
+        font-size: 18px;
+      }
+      .footer-details {
+        font-size: 13px;
+      }
+    }
+
+
+</style>
+</head>
+<body>
+
+
+     <header class="navbar">
+   <div style="display:flex; align-items:center; font-size:24px; font-weight:bold; color:white; margin-left:-20px;">
+  <img src="logo.png" alt="AgroPest Logo" style="height:40px; display:flex; margin-right:5px;">
+  <span>Agropest</span>
+</div>
+
+
+  <nav class="nav-links">
+  <a href="#">Home</a>
+  
+  <div class="dropdown">
+    <a href="#products.html">Products ▾</a>
+    <div class="dropdown-content">
+      <a href="#insecticides.html class="chip" data-filter="insecticide" role="tab"" >Insecticide</a>
+      <a href="#herbicides.html">Herbicide</a>
+      <a href="#fungicides.html">Fungicide</a>
+      <a href="#organic.html">Organic Nutrient</a>
+      <a href="#pesttraps.html">Pest Traps</a>
+    </div>
+  </div>
+  
+  <a href="#services.html">Our Services</a>
+      <a href="#aboutus.html">About Us</a>
+   <a href="#" id="callLink">Contact Us</a>
+
+<script>
+  document.getElementById("callLink").addEventListener("click", function() {
+    // Build the phone number dynamically (hidden from source view)
+    let phone = "+91" + "9014" + "255803";
+    window.location.href = "tel:" + phone;
+  });
+</script>
+</nav>
+
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="left">
+      <span class="kicker"><i class="fa-solid fa-seedling"></i> Multi-Product Excellence</span>
+      <h1>Precision Inputs & Smart Spraying for Higher Yields</h1>
+      <p>
+        From insecticides, herbicides, fungicides and organic nutrients to pest traps and
+        <strong>drone spraying services</strong> — Agropest powers farmers across Telangana & Andhra Pradesh with
+        trusted, top-brand products.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#showcase"><i class="fa-solid fa-basket-shopping"></i> Browse Products</a>
+        <a class="btn secondary" href="#filters"><i class="fa-solid fa-filter"></i> Quick Filters</a>
+      </div>
+    </div>
+
+    <div class="orbit-wrap" aria-hidden="true">
+      <div class="orbit" id="orbit">
+        <!-- 8 nodes around the ring. Replace src with your images -->
+        <figure class="node" style="--i:0">
+          <img src="https://images.unsplash.com/photo-1509223197845-458d87318791" alt="">
+          <span>Insecticides</span>
+        </figure>
+        <figure class="node" style="--i:1">
+          <img src="https://images.unsplash.com/photo-1509223197845-458d87318791" alt="">
+          <span>Herbicides</span>
+        </figure>
+        <figure class="node" style="--i:2">
+          <img src="https://th.bing.com/th/id/OIP.epIO5vOnf2kiKDvzPkk0wgHaEW?w=292&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="">
+          <span>Fungicides</span>
+        </figure>
+        <figure class="node" style="--i:3">
+          <img src="https://th.bing.com/th/id/OIP.Y02qGYlW-m4bSq8sVrAHVAHaE7?w=241&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="">
+          <span>Organic Nutrients</span>
+        </figure>
+        <figure class="node" style="--i:4">
+          <img src="data:image/webp;base64,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" alt="">
+          <span>Pest Traps</span>
+        </figure>
+        <figure class="node" style="--i:5">
+          <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97d4e?q=80&w=800&auto=format&fit=crop" alt="">
+          <span>Drone Service</span>
+        </figure>
+        <figure class="node" style="--i:6">
+          <img src="https://th.bing.com/th/id/OIP.q7527ASvEDqtjIOH1erhrAHaE7?w=190&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="">
+          <span>Soil Health</span>
+        </figure>
+        <figure class="node" style="--i:7">
+          <img src="https://www.bing.com/th/id/OIP.SOjasANluFt--FvydZJVZAHaFA?w=239&h=211&c=8&rs=1&qlt=90&r=0&o=6&dpr=1.3&pid=3.1&rm=2" alt="">
+          <span>Drone</span>
+        </figure>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scrolling ticker -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span><i class="fa-solid fa-bug"></i> Insecticides</span>
+      <span><i class="fa-solid fa-leaf"></i> Herbicides</span>
+      <span><i class="fa-solid fa-bacteria"></i> Fungicides</span>
+      <span><i class="fa-solid fa-droplet"></i> Organic Nutrients</span>
+      <span><i class="fa-solid fa-spider"></i> Pest Traps</span>
+      <span><i class="fa-solid fa-helicopter"></i> Drone Spraying</span>
+      <span><i class="fa-solid fa-tractor"></i> Farm Tools</span>
+      <span><i class="fa-solid fa-bug"></i> Insecticides</span>
+      <span><i class="fa-solid fa-leaf"></i> Herbicides</span>
+      <span><i class="fa-solid fa-bacteria"></i> Fungicides</span>
+      <span><i class="fa-solid fa-seeds"></i> Organic Nutrients</span>
+      <span><i class="fa-solid fa-spider"></i> Pest Traps</span>
+      <span><i class="fa-solid fa-helicopter"></i> Drone Spraying</span>
+      <span><i class="fa-solid fa-tractor"></i> Farm Tools</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FILTER BAR ========== -->
+<section id="filters" class="filter-bar">
+  <div class="container filter-inner">
+    <div class="chips" role="tablist" aria-label="Product filters">
+      <div class="chip active" data-filter="all" role="tab">All</div>
+      <div class="chip" data-filter="insecticide" role="tab">Insecticides</div>
+      <div class="chip" data-filter="herbicide" role="tab">Herbicides</div>
+      <div class="chip" data-filter="fungicide" role="tab">Fungicides</div>
+      <div class="chip" data-filter="organic" role="tab">Organic Nutrients</div>
+      <div class="chip" data-filter="trap" role="tab">Pest Traps</div>
+      <div class="chip" data-filter="drone" role="tab">Drone Service</div>
+    </div>
+    <a class="btn secondary" href="#showcase"><i class="fa-solid fa-arrow-down-long"></i> See Products</a>
+  </div>
+</section>
+
+<!-- ========== PRODUCT GRID ========== -->
+<section id="showcase" class="container">
+  <div class="grid" id="grid">
+    <!-- Sample cards (duplicate/change as needed) -->
+        <article class="card" data-cat="insecticide" onclick="window.location.href='acemain.html'">
+
+      <div class="card-media">
+        <img src="acemain.webp" alt="acemain">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Acemain</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='agadi_g.html'">
+  
+      <div class="card-media">
+        <img src="agadi_g.webp" alt="agadi-g">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Agadi-G</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='agadi_sc.html'">
+  
+      <div class="card-media">
+        <img src="agadi_sc.webp" alt="agadi-sc">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Agadi-SC</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='agadisuper.html'">
+  
+      <div class="card-media">
+        <img src="agadisuper.webp" alt="agadisuper">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Agadi Super</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='agas.html'">
+  
+      <div class="card-media">
+        <img src="agas.webp" alt="agas">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Agas</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='allcronsuper.html'">
+  
+      <div class="card-media">
+        <img src="allcronsuper.jpg" alt="allcron super">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Allcron Super</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='amaze.html'">
+  
+      <div class="card-media">
+        <img src="amaze.jpg" alt="amaze">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Amaze</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ampligo.html'">
+  
+      <div class="card-media">
+        <img src="ampligo.webp" alt="ampligo">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ampligo</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='axeman.html'">
+  
+      <div class="card-media">
+        <img src="axeman.webp" alt="axeman">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Axeman</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayuban-505.html'">
+  
+      <div class="card-media">
+        <img src="ayuban505.jpg" alt="ayuban-505">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayuban-505</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayuban20.html'">
+  
+      <div class="card-media">
+        <img src="ayuban20.jpg" alt="ayuban-20">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayuban-20</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayuban50.html'">
+  
+      <div class="card-media">
+        <img src="ayuban50.jpg" alt="ayuban50">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayuban-50</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayuclaim.html'">
+  
+      <div class="card-media">
+        <img src="ayuclaim.jpeg" alt="ayuclaim">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayuclaim</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayustara.html'">
+  
+      <div class="card-media">
+        <img src="ayustara.jpg" alt="ayustara">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayustara</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ayustara75.html'">
+  
+      <div class="card-media">
+        <img src="ayustara75.jpg" alt="ayustara75">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayustara-75</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='barazide.html'">
+  
+      <div class="card-media">
+        <img src="barazide.webp" alt="barazide">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Barazide</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='barroz.html'">
+  
+      <div class="card-media">
+        <img src="barroz.webp" alt="barroz">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Barroz</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='best4g.html'">
+  
+      <div class="card-media">
+        <img src="best4g.png" alt="Best-4G">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Best-4g</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='bigboss.html'">
+  
+      <div class="card-media">
+        <img src="bigboss.jpg" alt="Bigboss">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Bigboss</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='bipimain.html'">
+  
+      <div class="card-media">
+        <img src="bipimain.webp" alt="Bipimain">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Bipimain</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='boregang.html'">
+  
+      <div class="card-media">
+        <img src="boregang.webp" alt="Boregang">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Boregang</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='boregansp.html'">
+  
+      <div class="card-media">
+        <img src="boregansp.webp" alt="boregansp">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Boregan SP</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='carbomain.html'">
+  
+      <div class="card-media">
+        <img src="carbomain.webp" alt="carbomain">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Carbomain</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='chess.html'">
+  
+      <div class="card-media">
+        <img src="chess.jpg" alt="chess">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Chess</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='citigen.html'">
+  
+      <div class="card-media">
+        <img src="citigen.webp" alt="citigen">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Citigen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='confidantextra.html'">
+  
+      <div class="card-media">
+        <img src="confidantextra.jpg" alt="confidant extra">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Confidant Extra</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='confidantsuper.html'">
+  
+      <div class="card-media">
+        <img src="confidantsuper.jpg" alt="confidant super">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Confidant Super</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='cubax.html'">
+  
+      <div class="card-media">
+        <img src="cubax.webp" alt="cubax">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Cubax</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='cubaxpower.html'">
+  
+      <div class="card-media">
+        <img src="cubaxpower.webp" alt="cubax power">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Cubax Power</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='cyperpro.html'">
+  
+      <div class="card-media">
+        <img src="cyperpro.jpg" alt="cyper pro">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Cyper Pro</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='defender.html'">
+  
+      <div class="card-media">
+        <img src="defender.png" alt="defender">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Defender</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='deltramax11.html'">
+  
+      <div class="card-media">
+        <img src="deltramax11.jpg" alt="deltramax-11">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>DeltraMax-11</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='diron.html'">
+  
+      <div class="card-media">
+        <img src="diron.webp" alt="diron">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Diron</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='enfuse.html'">
+  
+      <div class="card-media">
+        <img src="enfuse.webp" alt="enfuse">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Enfuse</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='evicent.html'">
+  
+      <div class="card-media">
+        <img src="evicent.webp" alt="evicent">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Evicent</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='fasten.html'">
+  
+      <div class="card-media">
+        <img src="fasten.png" alt="fasten">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Fasten</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='fida.html'">
+  
+      <div class="card-media">
+        <img src="fida.jpg" alt="fida">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Fida</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='ghotu.html'">
+  
+      <div class="card-media">
+        <img src="ghotu.webp" alt="ghotu">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ghotu</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='harrier.html'">
+  
+      <div class="card-media">
+        <img src="harrier.webp" alt="harrier">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Harrier</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='imperial.html'">
+  
+      <div class="card-media">
+        <img src="imperial.webp" alt="imperial">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Imperial</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='irma.html'">
+  
+      <div class="card-media">
+        <img src="irma.png" alt="irma">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Irma</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='katera.html'">
+  
+      <div class="card-media">
+        <img src="katera.jpg" alt="katera">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Katera</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='lakra.html'">
+  
+      <div class="card-media">
+        <img src="lakra.webp" alt="lakra">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Lakra</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='lamdex.html'">
+  
+      <div class="card-media">
+        <img src="lamdex.webp" alt="lamdex">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Lamdex</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='lamdexsuper.html'">
+  
+      <div class="card-media">
+        <img src="lamdexsuper.webp" alt="lamdex super">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Lamdex Super</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='letham.html'">
+  
+      <div class="card-media">
+        <img src="letham.jpg" alt="letham">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Letham</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='mahabali.html'">
+  
+      <div class="card-media">
+        <img src="mahabali.webp" alt="mahabali">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Mahabali</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='mainstar.html'">
+  
+      <div class="card-media">
+        <img src="mainstar.webp" alt="mainstar">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Mainstar</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='mastery.html'">
+  
+      <div class="card-media">
+        <img src="mastery.webp" alt="mastery">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Mastery</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='merit.html'">
+  
+      <div class="card-media">
+        <img src="merit.jpg" alt="merit">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Merit</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='minectoxtra.html'">
+  
+      <div class="card-media">
+        <img src="minectoxtra.webp" alt="minecto xtra">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Minecto Xtra</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='monomain.html'">
+  
+      <div class="card-media">
+        <img src="monomain.webp" alt="monomain">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Monomain</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='natgen.html'">
+  
+      <div class="card-media">
+        <img src="natgen.jpg" alt="natgen">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Natgen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='nelsa.html'">
+  
+      <div class="card-media">
+        <img src="nelsa.jpeg" alt="nelsa">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Nelsa</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='nemagen.html'">
+  
+      <div class="card-media">
+        <img src="nemagen.png" alt="nemagen">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Nemagen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='novoxa.html'">
+  
+      <div class="card-media">
+        <img src="novoxa.webp" alt="novoxa">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Novoxa</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='parviz.html'">
+  
+      <div class="card-media">
+        <img src="parviz.webp" alt="parviz">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Parviz</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='pedestal.html'">
+  
+      <div class="card-media">
+        <img src="pedestal.webp" alt="pedestal">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pedestal</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='pedestalsupra.html'">
+  
+      <div class="card-media">
+        <img src="pedestalsupra.webp" alt="pedestal supra">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pedestal Supra</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='pegasus.html'">
+  
+      <div class="card-media">
+        <img src="pegasus.webp" alt="pegasus">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pegasus</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='phantom.html'">
+  
+      <div class="card-media">
+        <img src="phantom.jpg" alt="phantom">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Phantom</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='plesiva.html'">
+  
+      <div class="card-media">
+        <img src="plesiva.webp" alt="plesiva">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Plesiva</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='plethora.html'">
+  
+      <div class="card-media">
+        <img src="plethora.webp" alt="plethora">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Plethora</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='polozapp.html'">
+  
+      <div class="card-media">
+        <img src="polozapp.webp" alt="polozapp">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Polozapp</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='poros.html'">
+  
+      <div class="card-media">
+        <img src="poros.webp" alt="poros">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Poros</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='prado.html'">
+  
+      <div class="card-media">
+        <img src="prado.jpg" alt="prado">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Prado</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='prodan.html'">
+  
+      <div class="card-media">
+        <img src="prodan.jpg" alt="prodan">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Prodan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='profigan.html'">
+  
+      <div class="card-media">
+        <img src="profigan.webp" alt="profigan">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Profigan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='profiganplus.html'">
+  
+      <div class="card-media">
+        <img src="profiganplus.webp" alt="profiganplus">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Profigan Plus</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='pydon.html'">
+  
+      <div class="card-media">
+        <img src="pydon.webp" alt="pydon">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pydon</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+<article class="card" data-cat="insecticide" onclick="window.location.href='pymax.html'">
+  
+      <div class="card-media">
+        <img src="pymax.webp" alt="pymax">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pymax</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='regal.html'">
+  
+      <div class="card-media">
+        <img src="regal.jpg" alt="regal">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Regal</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='reveal.html'">
+  
+      <div class="card-media">
+        <img src="reveal.webp" alt="reveal">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Reveal</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='revolt.html'">
+  
+      <div class="card-media">
+        <img src="revolt.webp" alt="revolt">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Revolt</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='ronfen.html'">
+  
+      <div class="card-media">
+        <img src="ronfen.png" alt="ronfen">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ronfen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='sigalit.html'">
+  
+      <div class="card-media">
+        <img src="sigalit.webp" alt="sigalit">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sigalit</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='simodis.html'">
+  
+      <div class="card-media">
+        <img src="simodis.webp" alt="simodis">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Simodis</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='spinosher.html'">
+  
+      <div class="card-media">
+  <img src="spinosher.png" alt="spinosher">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Spinosher</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='spintocon.html'">
+  
+      <div class="card-media">
+  <img src="spintocon.png" alt="spintocon">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Spintocon</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='starwar.html'">
+  
+      <div class="card-media">
+  <img src="starwar.jpg" alt="starwar">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Starwar</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='status.html'">
+  
+      <div class="card-media">
+  <img src="status.jpg" alt="status">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Status</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='suckgan.html'">
+  
+      <div class="card-media">
+  <img src="suckgan.webp" alt="suckgan">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Suckgan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='sy-505.html'">
+  
+      <div class="card-media">
+  <img src="sy-505.jpg" alt="sy-505">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sy-505</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='syaceta.html'">
+  
+      <div class="card-media">
+  <img src="syaceta.jpg" alt="syaceta">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syaceta</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='sycart.html'">
+  
+      <div class="card-media">
+  <img src="sycart.jpg" alt="sycart">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sycart</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='syema.html'">
+  
+      <div class="card-media">
+  <img src="syema.jpg" alt="syema">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syema</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='sylambda.html'">
+  
+      <div class="card-media">
+  <img src="sylambda.png" alt="sylambda">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sylambda</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='sylice.html'">
+  
+      <div class="card-media">
+  <img src="sylice.jpg" alt="sylice">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sylice</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='symida.html'">
+  
+      <div class="card-media">
+  <img src="symida.jpg" alt="symida">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Symida</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='symidatop.html'">
+  
+      <div class="card-media">
+  <img src="symidatop.jpg" alt="symida top">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Symida Top</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+     <article class="card" data-cat="insecticide" onclick="window.location.href='symono.html'">
+  
+      <div class="card-media">
+  <img src="symono.jpg" alt="symono">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Symono</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+         <article class="card" data-cat="insecticide" onclick="window.location.href='syproc.html'">
+  
+      <div class="card-media">
+  <img src="syproc.jpg" alt="syproc">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sypro-C</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+      <article class="card" data-cat="insecticide" onclick="window.location.href='sypronil.html'">
+  
+      <div class="card-media">
+  <img src="sypronil.jpg" alt="sypronil">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sypronil</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='sytara.html'">
+  
+      <div class="card-media">
+  <img src="sytara.jpg" alt="sytara">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sytara</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='sytara.html'">
+  
+      <div class="card-media">
+  <img src="sytara.jpg" alt="sytara">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sytara</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='takaf.html'">
+  
+      <div class="card-media">
+  <img src="takaf.webp" alt="takaf">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Takaf</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='tapuz.html'">
+  
+      <div class="card-media">
+  <img src="tapuz.webp" alt="tapuz">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Tapuz</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='throne.html'">
+  
+      <div class="card-media">
+  <img src="throne.webp" alt="throne">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Throne</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='trassid.html'">
+  
+      <div class="card-media">
+  <img src="trassid.webp" alt="trassid">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Trassid</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='virtako.html'">
+  
+      <div class="card-media">
+  <img src="virtako.jpeg" alt="virtako">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Virtako</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-cat="insecticide" onclick="window.location.href='vistara.html'">
+  
+      <div class="card-media">
+  <img src="vistara.png" alt="vistara">
+        <span class="badge">Insecticide</span>
+      </div>
+      <div class="card-body">
+        <h3>Vistara</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    <article class="card" data-cat="herbicide" onclick="window.location.href='24dagan.html'">
+      <div class="card-media">
+  <img src="24dagan.webp" alt="2,4-D Agan">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>2,4-D Agan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='24dmain.html'">
+      <div class="card-media">
+  <img src="24dmain.webp" alt="2,4-D Main">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>2,4-D Main</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='agil.html'">
+      <div class="card-media">
+  <img src="agil.webp" alt="Agil">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Agil</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='atranex.html'">
+      <div class="card-media">
+  <img src="atranex.webp" alt="Atranex">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Atranex</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='ayufit.html'">
+      <div class="card-media">
+  <img src="ayufit.jpg" alt="Ayufit">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayufit</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='azaro.html'">
+      <div class="card-media">
+  <img src="azaro.png" alt="Azaro">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Azaro</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='bestie.html'">
+      <div class="card-media">
+  <img src="bestie.webp" alt="Bestie">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Bestie</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='byju.html'">
+      <div class="card-media">
+  <img src="byju.png" alt="Byju">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Byju</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='chlormax.html'">
+      <div class="card-media">
+  <img src="chlormax.webp" alt="Chlormax">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Chlormax</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='clodinagan.html'">
+      <div class="card-media">
+  <img src="clodinagan.webp" alt="Clodinagan">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Clodinagan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='cutout.html'">
+      <div class="card-media">
+  <img src="cutout.jpg" alt="Cutout">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Cutout</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='eyal.html'">
+      <div class="card-media">
+  <img src="eyal.jpg" alt="Eyal">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Eyal</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='galigan.html'">
+      <div class="card-media">
+  <img src="galigan.webp" alt="Galigan">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Galigan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='headshot.html'">
+      <div class="card-media">
+  <img src="headshot.png" alt="Headshot">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Headshot</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='majour.html'">
+      <div class="card-media">
+  <img src="majour.webp" alt="Majour">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Majour</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='paranex.html'">
+      <div class="card-media">
+  <img src="paranex.webp" alt="Paranex">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Paranex</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='pendifast.html'">
+      <div class="card-media">
+  <img src="pendifast.png" alt="Pendifast">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pendifast</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='penfop.html'">
+      <div class="card-media">
+  <img src="penfop.png" alt="Penfop">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Penfop</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='pretigan.html'">
+      <div class="card-media">
+  <img src="pretigan.webp" alt="Pretigan">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Pretigan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='promoxin.html'">
+      <div class="card-media">
+  <img src="promoxin.jpg" alt="Promoxin">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Promoxin</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='propifen.html'">
+      <div class="card-media">
+  <img src="propifen.png" alt="Propifen">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Propifen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='propique.html'">
+      <div class="card-media">
+  <img src="propique.png" alt="Propique">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Propique</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='qfop10.html'">
+      <div class="card-media">
+  <img src="qfop10.webp" alt="Q-Fop 10">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Q-Fop 10</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='right.html'">
+      <div class="card-media">
+  <img src="right.jpg" alt="Right">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Right</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='shaked.html'">
+      <div class="card-media">
+  <img src="shaked.webp" alt="Shaked">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Shaked</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='syfit.html'">
+      <div class="card-media">
+  <img src="syfit.jpg" alt="Syfit">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syfit</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='symoxone.html'">
+      <div class="card-media">
+  <img src="Symoxone.jpg" alt="Symoxone">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Symoxone</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='tupro.html'">
+      <div class="card-media">
+  <img src="tupro.png" alt="Tupro">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Tupro</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='vypyr.html'">
+      <div class="card-media">
+  <img src="vypyr.webp" alt="Vypyr">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Vypyr</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+     <article class="card" data-cat="herbicide" onclick="window.location.href='weedsmash.html'">
+      <div class="card-media">
+  <img src="weedsmash.png" alt="Weed Smash">
+        <span class="badge">Herbicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Weed Smash</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='amistartop.html'">
+      <div class="card-media">
+  <img src="amistartop.jpg" alt="Amistar top">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Amistar Top</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='ayustodia.html'">
+      <div class="card-media">
+  <img src="ayustodia.jpg" alt="Ayustodia">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Ayustodia</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='blasil.html'">
+      <div class="card-media">
+  <img src="blasil.webp" alt="Blasil">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Blasil</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='blastogan.html'">
+      <div class="card-media">
+  <img src="blastogan.webp" alt="Blastogan">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Blastogan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='cliff.html'">
+      <div class="card-media">
+  <img src="cliff.jpg" alt="Cliff">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Cliff</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='coltaf.html'">
+      <div class="card-media">
+  <img src="coltaf.jpeg" alt="Coltaf">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Coltaf</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='constop.html'">
+      <div class="card-media">
+  <img src="constop.jpg" alt="Constop">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Constop</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='custodia.html'">
+      <div class="card-media">
+  <img src="custodia.webp" alt="Custodia">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Custodia</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='defender.html'">
+      <div class="card-media">
+  <img src="defender.png" alt="Defender">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Defender</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='graliz.html'">
+      <div class="card-media">
+  <img src="graliz.png" alt="Graliz">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Graliz</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+      <article class="card" data-cat="fungicide" onclick="window.location.href='isomain.html'">
+      <div class="card-media">
+  <img src="isomain.webp" alt="Graliz">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Isomain</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='kavachflo.html'">
+      <div class="card-media">
+  <img src="kavachflo.jpg" alt="Kavachflo">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Kavachflo</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='macoban-c.html'">
+      <div class="card-media">
+  <img src="macoban-c.webp" alt="Macoban-C">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Macoban-C</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='mupa.html'">
+      <div class="card-media">
+  <img src="mupa.jpg" alt="Mupa">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Mupa</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='natcore.html'">
+      <div class="card-media">
+  <img src="natcore.jpg" alt="Natcore">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Natcore</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="fungicide" onclick="window.location.href='natpearl.html'">
+      <div class="card-media">
+  <img src="natpearl.jpg" alt="Natpearl">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Natpearl</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="fungicide" onclick="window.location.href='nimrod.html'">
+      <div class="card-media">
+  <img src="nimrod.webp" alt="Nimrod">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Nimrod</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='orius.html'">
+      <div class="card-media">
+  <img src="orius.webp" alt="Orius">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Orius</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='shamir.html'">
+      <div class="card-media">
+  <img src="shamir.webp" alt="Shamir">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Shamir</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='syhexa.html'">
+      <div class="card-media">
+  <img src="syhexa.jpg" alt="Syhexa">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syhexa</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='syodia.html'">
+      <div class="card-media">
+  <img src="syodia.jpg" alt="Syodia">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syodia</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='syqat.html'">
+      <div class="card-media">
+  <img src="syqat.jpg" alt="Syqat">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Syqat</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='sysafe.html'">
+      <div class="card-media">
+  <img src="sysafe.jpg" alt="Sysafe">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Sysafe</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='tebuca.html'">
+      <div class="card-media">
+  <img src="tebuca.webp" alt="Tebuca">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Tebuca</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='tricolor.html'">
+      <div class="card-media">
+  <img src="tricolor.png" alt="Tricolor">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Tricolor</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='warden.html'">
+      <div class="card-media">
+  <img src="warden.png" alt="Warden">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Warden</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='wardenextra.html'">
+      <div class="card-media">
+  <img src="wardenextra.png" alt="Warden Extra">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Warden Extra</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+       <article class="card" data-cat="fungicide" onclick="window.location.href='zamir.html'">
+      <div class="card-media">
+  <img src="zamir.webp" alt="Zamir">
+        <span class="badge">Fungicide</span>
+      </div>
+      <div class="card-body">
+        <h3>Zamir</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+ <article class="card" data-cat="organic" onclick="window.location.href='agrogengold.html'">
+      <div class="card-media">
+  <img src="agrogengold.webp" alt="Agrogen Gold">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Agrogen Gold</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="organic" onclick="window.location.href='agrogenmaxpro.html'">
+      <div class="card-media">
+  <img src="agrogenmaxpro.webp" alt="Agrogenmax Pro">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Agrogenmax Pro</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="organic" onclick="window.location.href='agrostar.html'">
+      <div class="card-media">
+  <img src="agrostar.jpg" alt="Agrostar">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Agrostar</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="organic" onclick="window.location.href='bactolan.html'">
+      <div class="card-media">
+  <img src="bactolan.jpg" alt="Bactolan">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Bactolan</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="organic" onclick="window.location.href='borogen.html'">
+      <div class="card-media">
+  <img src="borogen.webp" alt="Borogen">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Borogen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="organic" onclick="window.location.href='boron.html'">
+      <div class="card-media">
+  <img src="boron.jpg" alt="Boron">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Boron</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='cmb.html'">
+      <div class="card-media">
+  <img src="cmb.jpg" alt="CMB">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>CMB</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='copper.html'">
+      <div class="card-media">
+  <img src="copper.jpg" alt="Copper">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Copper</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='doublestrong.html'">
+      <div class="card-media">
+  <img src="doublestrong.webp" alt="Double Strong">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Double Strong</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='exogen.html'">
+      <div class="card-media">
+  <img src="exogen.webp" alt="Exogen">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Exogen</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+      <article class="card" data-cat="organic" onclick="window.location.href='ferrous.html'">
+      <div class="card-media">
+  <img src="ferrous.jpg" alt="Ferrous">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Ferrous</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+      <article class="card" data-cat="organic" onclick="window.location.href='flora99.html'">
+      <div class="card-media">
+  <img src="flora99.webp" alt="Flora-99">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Flora-99</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='gencolmg.html'">
+      <div class="card-media">
+  <img src="gencolmg.webp" alt="Gencol-Mg">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Gencol-Mg</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='genpower.html'">
+      <div class="card-media">
+  <img src="genpower.webp" alt="Gen Power">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Gen Power</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='gentonik.html'">
+      <div class="card-media">
+  <img src="gentonik.webp" alt="Gentonik">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Gentonik</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='gmag.html'">
+      <div class="card-media">
+  <img src="gmag.webp" alt="G-Mag">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>G-Mag</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='gmyte.html'">
+      <div class="card-media">
+  <img src="gmyte.webp" alt="G-Myte">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>G-Myte</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='gtmax.html'">
+      <div class="card-media">
+  <img src="gtmax.webp" alt="Gt-Max">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Gt-Max</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='help.html'">
+      <div class="card-media">
+  <img src="help.jpg" alt="Help">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Help</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='npk.html'">
+      <div class="card-media">
+  <img src="npk.jpg" alt="NPK">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>NPK</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='nutrimaxplus.html'">
+      <div class="card-media">
+  <img src="nutrimaxplus.webp" alt="Nutrimax Plus">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Nutrimax Plus</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='nutripearl.html'">
+      <div class="card-media">
+  <img src="nutripearl.jpg" alt="Nutripearl">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Nutripearl</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='protector.html'">
+      <div class="card-media">
+  <img src="protector.jpg" alt="Protector">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Protector</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='sky.html'">
+      <div class="card-media">
+  <img src="sky.jpg" alt="Sky">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Sky</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='smash.html'">
+      <div class="card-media">
+  <img src="smash.jpg" alt="Smash">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Smash</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='sprint.html'">
+      <div class="card-media">
+  <img src="sprint.jpg" alt="Sprint">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Sprint</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='talwargold.html'">
+      <div class="card-media">
+  <img src="talwargold.webp" alt="Talwar Gold">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Talwar Gold</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='terror.html'">
+      <div class="card-media">
+  <img src="terror.jpg" alt="Terror">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Terror</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+      <article class="card" data-cat="organic" onclick="window.location.href='varsha.html'">
+      <div class="card-media">
+  <img src="varsha.jpg" alt="Varsha">
+        <span class="badge">Organic Nutrients</span>
+      </div>
+      <div class="card-body">
+        <h3>Varsha</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+ <article class="card" data-cat="trap" onclick="window.location.href='stickypesttrap.html'">
+      <div class="card-media">
+  <img src="yellowsticky.jpg" alt="Yellow Sticky Trap">
+        <span class="badge">Pest Trap</span>
+      </div>
+      <div class="card-body">
+        <h3>Yellow Sticky Pest Trap</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-cat="trap" onclick="window.location.href='solarlight.html'">
+      <div class="card-media">
+  <img src="solarlight.webp" alt="Solar Light Pesttrap">
+        <span class="badge">Pest Trap</span>
+      </div>
+      <div class="card-body">
+        <h3>Solar Light Pesttrap</h3>
+        <div class="meta">
+          <button class="quick">Quick View</button>
+        </div>
+      </div>
+    </article>
+
+    
+    <!-- Add more items as needed, just set data-cat -->
+  </div>
+</section>
+
+<!-- ========== MODAL ========== -->
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="close" id="closeModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-media"><img id="mImg" src="" alt=""></div>
+    <div class="modal-body">
+      <h3 id="mTitle">Product</h3>
+      <p id="mDesc">Details will appear here. Provide composition, dose, target pests/diseases, and safety notes.</p>
+      <div class="modal-actions">
+        <a class="btn" href="#contact"><i class="fa-solid fa-phone"></i> Contact</a>
+        <a class="btn secondary" href="#enquiry"><i class="fa-solid fa-file-signature"></i> Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+      <img src="https://thumbs.dreamstime.com/b/sunrise-over-corn-field-beautiful-morning-90025674.jpg" alt="Footer Background" class="footer-img">
+<div class="footer-content">
+        <div style="display:flex; align-items:center; font-size:24px; font-weight:bold; color:#2c5f2d;">
+  <img src="logo.png" alt="AgroPest Logo" style="height:40px; margin-right:10px;">
+  <h2 style="color: white;">Agropest</h2>
+</div>
+
+
+      <div class="footer-links">
+        <a href="#home.html">Home</a>
+        <a href="#products.html">Products</a>
+        <a href="#services.html">Our Services</a>
+                <a href="#aboutus.html">About Us</a>
+      </div>
+ <div class="social-icons">
+        <a href="https://www.instagram.com/agro_pest_?igsh=emNiaXpianJiamtr" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://wa.me/919985352767" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+
+        <a href="tel:+919014255803"><i class="fas fa-phone"></i></a>
+        <a href="mailto:info@agropest.in"><i class="fas fa-envelope"></i></a>
+      </div>
+ <div class="footer-details">
+  <p>
+  📍 
+  <a href="https://www.google.com/maps/place/Bhavani+Traders/@16.1761345,77.8669257,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb601a56fd71a21:0xd2fd6a2ed0df9f1e!8m2!3d16.1761345!4d77.8669257!16s%2Fg%2F11y8cdghrk?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D" 
+     target="_blank" 
+     style="color:white; text-decoration:none;">
+    Bhavani Traders, Ananthapuram Village, Gadwal Mandal, Jogulamba Gadwal District, Telangana
+  </a>
+</p>
+
+
+
+      
+      </div>
+
+      <div class="copyright">
+        <p>© 2025 Agropest. All rights reserved.</p>
+      </div>
+    </div>
+</footer>
+
+
+<script>
+
+     const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('show');
+  });
+
+/* ===== Orbit tilt on mouse / device tilt ===== */
+const orbitWrap = document.querySelector('.orbit-wrap');
+const orbit = document.getElementById('orbit');
+let rx = 0, ry = 0;
+
+function tilt(e){
+  const r = orbitWrap.getBoundingClientRect();
+  const x = (e.clientX ?? (e.touches && e.touches[0].clientX)) - r.left;
+  const y = (e.clientY ?? (e.touches && e.touches[0].clientY)) - r.top;
+  const cx = x / r.width - .5;
+  const cy = y / r.height - .5;
+  rx = cy * -10; // X rotate
+  ry = cx * 12;  // Y rotate
+  orbit.style.transform = `rotateX(${rx}deg) rotateY(calc(360deg * var(--spin, 0) + ${ry}deg))`;
+}
+orbitWrap.addEventListener('mousemove', tilt, {passive:true});
+orbitWrap.addEventListener('touchmove', tilt, {passive:true});
+
+/* Pause spin on hover (CSS already pauses animation); 
+   here we keep slight interactive transform */
+orbitWrap.addEventListener('mouseenter', ()=> orbit.style.animationPlayState='paused');
+orbitWrap.addEventListener('mouseleave', ()=>{
+  orbit.style.animationPlayState='running';
+  orbit.style.transform = '';
+});
+
+/* ===== Intersection reveal for cards ===== */
+const cards = document.querySelectorAll('.card');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+  });
+},{threshold:.15});
+cards.forEach(c=>io.observe(c));
+
+/* ===== Filters ===== */
+const chips = document.querySelectorAll('.chip');
+const grid = document.getElementById('grid');
+chips.forEach(ch=>{
+  ch.addEventListener('click', ()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');
+    const f = ch.dataset.filter;
+    const items = grid.querySelectorAll('.card');
+    items.forEach(it=>{
+      const show = (f==='all') || it.dataset.cat === f;
+      it.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+/* ===== Quick view modal ===== */
+const modal = document.getElementById('modal');
+const closeModal = document.getElementById('closeModal');
+const mImg = document.getElementById('mImg');
+const mTitle = document.getElementById('mTitle');
+const mDesc = document.getElementById('mDesc');
+
+grid.addEventListener('click',(e)=>{
+  const btn = e.target.closest('.quick');
+  if(!btn) return;
+  const card = btn.closest('.card');
+  mImg.src = card.querySelector('img').src;
+  mTitle.textContent = card.querySelector('h3').textContent;
+  mDesc.textContent = card.querySelector('p').textContent;
+  modal.classList.add('open');
+});
+closeModal.addEventListener('click',()=> modal.classList.remove('open'));
+modal.addEventListener('click',(e)=> { if(e.target===modal) modal.classList.remove('open'); });
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
