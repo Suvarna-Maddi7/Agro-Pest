@@ -91,7 +91,7 @@
    
 
 .about-section {
-  background:linear-gradient(180deg,#ecfff0 0%, #f6fff7 100%)
+  background:linear-gradient(180deg,#ecfff0 0%, #f6fff7 100%);
   padding: 80px 20px;
 }
 
@@ -613,6 +613,7 @@
         grid-template-columns: 1fr;
       }
     }    
+
 
 
 
